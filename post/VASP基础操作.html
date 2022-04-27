@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="VASP教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VASP基础操作">
+<meta property="og:url" content="http://example.com/post/VASP%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html">
+<meta property="og:site_name" content="博客学习">
+<meta property="og:description" content="VASP教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="file:///D:/blog/source/img/ISIF.png">
+<meta property="article:published_time" content="2022-04-26T09:44:11.729Z">
+<meta property="article:modified_time" content="2022-04-26T00:00:00.000Z">
+<meta property="article:author" content="Hma">
+<meta property="article:tag" content="VASP，理论计算">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="file:///D:/blog/source/img/ISIF.png"><title>VASP基础操作 | 博客学习</title><link ref="canonical" href="http://example.com/post/VASP%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">博客学习</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">VASP基础操作</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-04-26</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-04-26</span></span></div></header><div class="post-body"><h1 id="VASP基础操作">
+          <a href="#VASP基础操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#VASP基础操作" class="headerlink" title="VASP基础操作"></a>VASP基础操作</h1>
+      
+        <h2 id="1、VASP介绍">
+          <a href="#1、VASP介绍" class="heading-link"><i class="fas fa-link"></i></a><a href="#1、VASP介绍" class="headerlink" title="1、VASP介绍"></a>1、VASP介绍</h2>
+      <p><strong>VASP–原子尺度材料模拟的计算机程序包</strong></p>
+<p>VASP是维也纳大学Hafner小组开发的进行电子结构计算和量子力学-分子动力学模拟软件包。它是材料模拟和计算物质科学研究中最流行的商用软件之一。</p>
+
+        <h2 id="2、基础使用教程">
+          <a href="#2、基础使用教程" class="heading-link"><i class="fas fa-link"></i></a><a href="#2、基础使用教程" class="headerlink" title="2、基础使用教程"></a>2、基础使用教程</h2>
+      
+        <h5 id="（1）输入输出文件">
+          <a href="#（1）输入输出文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#（1）输入输出文件" class="headerlink" title="（1）输入输出文件"></a>（1）输入输出文件</h5>
+      <ul>
+<li>输入文件</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;INCAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;程序运行的主要参数，包括波函数、离子位置优化方法等</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;POSCAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优化前体系的结构信息，包括晶轴矢量、原子坐标</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;KPOINTS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;布里渊区积分的 k 点网格</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;POTCAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;各元素对应的赝势函数（VASP 自带）</p>
+<ul>
+<li>输出文件</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CONTCAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优化后体系的结构信息</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;OSZICAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优化过程中自洽循环的每一步所对应的能量</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;IBZKPT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;布里渊区 k 点坐标</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;EIGENVAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;各个 k 点的 Khon-Sham 方程本征值</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;XDATACAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每个位置的离子坐标</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;CHG、CHGCAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电荷密度</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;WAVECAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;波函数</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;DOSCAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总（分）态密度</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;OUTCAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总输出文件，包括结构、能量、本征值等</p>
+<ul>
+<li><p>INCAR文件</p>
+<p><strong>功能</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>标签</strong></p>
+</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;输入文件&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISTART、ICHARG</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;自旋与磁性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISPIN、MAGMOM、LNONCOLLINEAR、LSORBIT</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;精度与速度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PREC、ENCUT、NCORE</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;电荷与压强&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NELECT、PSTRESS</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;自洽循环&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALGO、EDIFF、NELM、AMIX</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;结构变化&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IBRION、EDIFFG、NSW、ISIF、ISYM</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;范德华力&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IVDW、LUSE_VDW</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;强关联能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LDAU、LDAUTYPE、LDAUL、LDAUU、LDAUJ</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;电子分布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISMEAR、NEDOS、LORBIT</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;介电函数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NBANDS、LOPTICS</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;电极化&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LDIPOL、IDIPOL、EFIELD、LVHAR</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;振动频率&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NFREE、POTIM</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;电荷投影&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LPARD、IBAND、LSEPB、NBMOD、EINT</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;分子动力学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TEBEG、TEEND、SMASS、NBLOCK</p>
+
+        <h5 id="（2）INCAR文件">
+          <a href="#（2）INCAR文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#（2）INCAR文件" class="headerlink" title="（2）INCAR文件"></a>（2）INCAR文件</h5>
+      <ul>
+<li><p><strong>ISTART</strong></p>
+<p>初始波函数</p>
+<p>0：随机生成波函数</p>
+<p>1：从 WAVECAR 读取波函数，若读取失败则随机生成</p>
+</li>
+<li><p><strong>ICHARG</strong></p>
+<p>初始电荷密度</p>
+<p>0：通过 WAVECAR 生成电荷密度，若读取失败则通过原子电荷密度叠加生成</p>
+<p>1：从 CHGCAR 读取电荷密度</p>
+<p>2：通过原子电荷密度叠加生成电荷密度</p>
+<p>11：从 CHGCAR 读取电荷密度，且在（非自洽）循环中保持不变</p>
+</li>
+<li><p><strong>ISPIN</strong></p>
+<p>自旋极化</p>
+<p>1：非自旋极化（每个轨道上自旋向上和自旋向下的电子数量相等，适合非磁性体系）</p>
+<p>2：自旋极化（适合铁磁、反铁磁体系）</p>
+</li>
+<li><p><strong>MAGMOM</strong></p>
+<p>原子初始磁矩</p>
+<p>每个原子的默认值均为 1</p>
+</li>
+<li><p><strong>LNONCOLLINEAR</strong></p>
+<p>非共线磁矩分布</p>
+<p>.F. : 自旋方向仅有上（正）下（负），MAGMOM 为标量</p>
+<p>.T. : 自旋方向为空间矢量，MAGMOM 为向量</p>
+</li>
+<li><p><strong>LSORBIT</strong></p>
+<p>自旋轨道耦合</p>
+<p>.F. : 关闭自旋轨道耦合</p>
+<p>.T. : 开启自旋轨道耦合，自动设置 LNONCOLLINEAR=.T.，需要 vasp_ncl 执行计算</p>
+</li>
+<li><p><strong>PREC</strong></p>
+<p>总体计算精度，可设为 Low、Med、High、<strong>Normal</strong>、Single、<strong>Accurate</strong></p>
+</li>
+<li><p><strong>ENCUT</strong></p>
+<p>平面波截断能（单位 eV）</p>
+<p>一般为 POTCAR 中 ENMAX 参数值的 1.0 到 1.3 倍</p>
+</li>
+<li><p><strong>NELECT</strong></p>
+<p>总电子数</p>
+<p>增加和减少该数值可实现体系带负电荷和正电荷</p>
+</li>
+<li><p><strong>NCORE</strong></p>
+<p>并行计算单个轨道所用的核心数量</p>
+<p>需要通过测试确定最优值</p>
+<p>与硬件和 VASP 编译有关，与计算体系无关</p>
+</li>
+<li><p><strong>NELECT</strong></p>
+<p>总电子数</p>
+<p>增加和减少该数值可实现体系带负电荷和正电荷</p>
+</li>
+<li><p><strong>PSTRESS</strong></p>
+<p>压强（三维），单位 0.1GPa</p>
+</li>
+<li><p><strong>ALGO</strong></p>
+<p>电子波函数优化算法</p>
+<p>N：DAV 算法，收敛性好，速度慢</p>
+<p>V：RMM 算法，收敛性差，速度快（大约比 N 快 2∼3 倍）</p>
+<p>F：上述两种算法结合，表现与 V 类似</p>
+</li>
+<li><p><strong>EDIFF</strong></p>
+<p>自洽循环收敛标准（系统能量变化），单位为 eV</p>
+<p>一般设置为 1E-5∼1E-6</p>
+</li>
+<li><p><strong>NELM</strong></p>
+<p>自洽循环最大计算步数</p>
+<p>自旋极化体系的实际计算步数一般大于非极化体系</p>
+<p>实际计算步数随着体系维数的下降而增加</p>
+</li>
+<li><p><strong>AMIX</strong></p>
+<p>自洽循环中电荷密度混合时新电荷密度的含量</p>
+<p>收敛不好时可降低数值</p>
+</li>
+<li><p><strong>IBRION</strong></p>
+<p>离子位置优化算法</p>
+<p>0：分子动力学模拟</p>
+<p>1：准牛顿法</p>
+<p>2：共轭梯度法</p>
+<p>5：振动频率计算</p>
+<p>6：弹性常数计算</p>
+</li>
+<li><p><strong>EDIFFG</strong></p>
+<p>离子位置优化收敛标准</p>
+<p>正值为系统能量变化，负值为原子上残余力</p>
+<p>随着体系维数下降，可适当增加原子残余力</p>
+</li>
+<li><p><strong>NSW</strong></p>
+<p>离子位置优化最大步数（IBRION=1、2）</p>
+<p>分子动力学模拟步数（IBRION=0）</p>
+</li>
+<li><p><strong>ISIF</strong></p>
+<p>需要结构优化变量</p>
+<img src="file:///D:/blog/source/img/ISIF.png" title="" alt="ISIF.png" width="410">
+</li>
+<li><p><strong>ISYM</strong></p>
+<p>结构对称性</p>
+<p>-1：不考虑对称性</p>
+<p>2：考虑对称性</p>
+</li>
+<li><p><strong>IVDW</strong></p>
+<p>DFT-D 范德华力修正方法</p>
+<p>10：DFT-D2 方法</p>
+<p>11：DFT-D3 方法</p>
+</li>
+<li><p><strong>LDAU、LDAUTYPE、LDAUL、LDAUU、LDAUJ</strong></p>
+<p>Hubbard U 模型描述电子强关联能</p>
+<p>LDAU=.T（F）.：打开（关闭）LDA+U 功能</p>
+<p>LDAUTYPE=1/2/4：加 U 不同的物理模型</p>
+<p>LDAUL=-1/1/2/3：不加 U 和给 p/d/f 轨道加 U</p>
+<p>LDAUU、LDAUJ 分别代表 U 和 J 值</p>
+</li>
+<li><p><strong>ISMEAR</strong></p>
+<p>轨道分数占据</p>
+<p>5：四面体方法（适合半导体和绝缘体）</p>
+<p>0：高斯方法（适合导体、半导体和绝缘体），展宽由 SIGMA 确定</p>
+<p>N：Methfessel-Paxton 方法（适合导体）</p>
+</li>
+<li><p><strong>NEDOS</strong></p>
+<p>态密度数据点个数，一般取 1000∼2000</p>
+</li>
+<li><p><strong>LORBIT</strong></p>
+<p>总态密度轨道投影</p>
+<p>10：投影到 s、p、d、f 轨道</p>
+<p>11：投影到 s、py、pz、px… 轨道</p>
+</li>
+<li><p><strong>NBANDS、LOPTICS</strong></p>
+<p>NBANDS 代表总能带（满带 + 空带）数量</p>
+<p>计算光学性质（LOPTICS=.T.）时设置为默认值 3∼4 倍</p>
+</li>
+<li><p><strong>LDIPOL、IDIPOL</strong></p>
+<p>LDIPOL=.T（F）.：开启（关闭）极化修正</p>
+<p>IDIPOL=1/2/3/4：沿 a/b/c/abc 轴方向进行极化修正</p>
+</li>
+<li><p><strong>EFIELD</strong></p>
+<p>外加电场，单位为 V/Å，方向由 IDIPOL 设置</p>
+</li>
+<li><p><strong>LVHAR</strong></p>
+<p>.T. ：输出静电势文件</p>
+<p>.F. ：不输出静电势文件</p>
+</li>
+<li><p><strong>NFREE</strong></p>
+<p>有限差分法取点个数</p>
+<p>1：前向差分</p>
+<p>2：中心差分</p>
+</li>
+<li><p><strong>POTIM</strong></p>
+<p>有限差分法步长、默认值 0.015</p>
+</li>
+<li><p><strong>LPARD</strong></p>
+<p>.T. ：开启电荷密度投影</p>
+<p>.F. ：不开启电荷密度投影</p>
+</li>
+<li><p><strong>IBAND、LSEPB</strong></p>
+<p>IBAND 代表需要投影的能带编号</p>
+<p>LSEPB=.T（F）.：投影电荷（不）区分能带编号</p>
+</li>
+<li><p><strong>NBMOD、EINT</strong></p>
+<p>NBMOD= 2：通过能量确定需要投影的电子</p>
+<p>EINT：投影能量范围</p>
+</li>
+<li><p><strong>TEBEG</strong></p>
+<p>分子动力学模拟的初始温度</p>
+</li>
+<li><p><strong>TEEND</strong></p>
+<p>分子动力学模拟的终止温度</p>
+</li>
+<li><p><strong>SMASS</strong></p>
+<p>分子动力学模拟的系综</p>
+<p>-3：微正则系综（能量守恒）</p>
+<p>2：原子速度保持不变</p>
+<p>1：原子速度每 NBLOCK 步做一次按比例调整，保持动能连续变化</p>
+<p>≥0：正则系综（温度不变）</p>
+</li>
+</ul>
+
+        <h5 id="（3）连接超算（服务器）">
+          <a href="#（3）连接超算（服务器）" class="heading-link"><i class="fas fa-link"></i></a><a href="#（3）连接超算（服务器）" class="headerlink" title="（3）连接超算（服务器）"></a>（3）连接超算（服务器）</h5>
+      <p>Windows：Xshell+Xftp、SSH Secure Shell Client、Putty 等软件</p>
+<p>Mac/Linux：ssh+scp 命令</p>
+<p>目前使用（windows）：Xshell 7(连接服务器) + Winscp(传输文件)</p>
+<p>Xshell中<strong>sz &amp; rz</strong>指令也可直接传输简单的文件</p>
+
+        <h2 id="3、Linux-操作系统基础命令">
+          <a href="#3、Linux-操作系统基础命令" class="heading-link"><i class="fas fa-link"></i></a><a href="#3、Linux-操作系统基础命令" class="headerlink" title="3、Linux 操作系统基础命令"></a>3、Linux 操作系统基础命令</h2>
+      <ul>
+<li><p>ls：显示指定目录下的内容，包括文件和文件夹</p>
+</li>
+<li><p>cd：改变工作路径</p>
+</li>
+<li><p>pwd：显示当前工作路径（绝对路径）</p>
+</li>
+<li><p>cp(-r)：复制文件（文件夹）</p>
+</li>
+<li><p>mv(-r)：移动文件（文件夹）</p>
+</li>
+<li><p>rm(-r)：移动文件（文件夹）</p>
+</li>
+<li><p>mkdir：创建文件夹</p>
+</li>
+<li><p>touch：创建文件</p>
+</li>
+<li><p>vi(vim): 编辑文件内容，进入后按 i 键进入插入模式，即可编辑内容;按 ESC 退出插入模式，输入:wq 保存退出（:!q不保存退出）</p>
+</li>
+<li><p>cat：将文件内容输出至屏幕（读取文件）</p>
+</li>
+<li><p>less：进入文件查看内容，按 q 键退出</p>
+</li>
+<li><p>grep：搜索关键词，并将关键词所在行及下面若干行内容输出至屏幕</p>
+</li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://example.com">Hma</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://example.com/post/VASP%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html">http://example.com/post/VASP%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/VASP%EF%BC%8C%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97/">VASP，理论计算</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/post/Markdown%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7.html"><span class="paginator-prev__text">Markdown常用技巧</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#VASP%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">
+          VASP基础操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81VASP%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">
+          1、VASP介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">
+          2、基础使用教程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.0.0.1.</span> <span class="toc-text">
+          （1）输入输出文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89INCAR%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.0.0.2.</span> <span class="toc-text">
+          （2）INCAR文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E8%BF%9E%E6%8E%A5%E8%B6%85%E7%AE%97%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%89"><span class="toc-number">1.2.0.0.3.</span> <span class="toc-text">
+          （3）连接超算（服务器）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">
+          3、Linux 操作系统基础命令</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">归档</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Hma</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v6.1.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
